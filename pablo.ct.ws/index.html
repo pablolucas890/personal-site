@@ -30,6 +30,34 @@
       width: 100%;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tab-button {
+      flex: 1;
+      padding: 10px;
+      background-color: #21262d;
+      border: none;
+      color: #c9d1d9;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .tab-button:hover {
+      background-color: #30363d;
+    }
+    .tab-button.active {
+      background-color: #58a6ff;
+      color: #0d1117;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
     h1 {
       margin-bottom: 10px;
       font-size: 28px;
@@ -74,6 +102,32 @@
       list-style-type: disc;
       margin-left: 20px;
     }
+    .linkedin-post {
+      background-color: #21262d;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .linkedin-post h3 {
+      color: #58a6ff;
+      margin-bottom: 10px;
+    }
+    .linkedin-post .date {
+      color: #6e7681;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .linkedin-post .content {
+      color: #c9d1d9;
+      margin-bottom: 10px;
+    }
+    .linkedin-post a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    .linkedin-post a:hover {
+      text-decoration: underline;
+    }
     @media (max-width: 480px) {
       .container {
         padding: 20px 15px;
@@ -84,6 +138,9 @@
       .links a {
         font-size: 14px;
       }
+      .tabs {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -92,30 +149,122 @@
     <h1>P89L0</h1>
     <p style="text-align:center">Debian Contributor</p>
     <blockquote>"Be free — it's priceless."</blockquote>
-    <div class="links">
-      <h2>Contact</h2>
-      <a href="https://instagram.com/pablolucas890" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://salsa.debian.org/pablolucas890" target="_blank"><i class="fas fa-code-branch"></i> Salsa</a>
-      <a href="https://github.com/pablolucas890" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-      <a href="https://contributors.debian.org/contributor/pablolucas890@salsa/" target="_blank"><i class="fas fa-user-astronaut"></i> Debian Contributors</a>
-      <a href="https://linkedin.com/in/pablolucas890" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      <a href="https://t.me/pablolucas890" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-      <a href="https://matrix.to/#/@pablolucas890:matrix.org" target="_blank"><i class="fas fa-comments"></i> Matrix</a>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="openTab(event, 'profile')">Profile</button>
+      <button class="tab-button" onclick="openTab(event, 'linkedin')">LinkedIn Posts</button>
     </div>
 
-    <section>
-      <h2>Current Atuation</h2>
-      <ul>
-        <li><strong><a style="color:#58a6ff; text-decoration: none;" href="https://www.amoradev.com.br/" target="_blank">AmoraDev</a></strong> – Tech Solutions.</li>
-        <li><strong><a style="color:#58a6ff; text-decoration: none;" href="https://www.jepdevs.com.br/" target="_blank">JEPdevs</a></strong> – Sites and E-commerces.</li>
-        <li><strong><a style="color:#58a6ff; text-decoration: none;" href="https://ippo.com.br/" target="_blank">Ippo</a></strong> – AI for Nutritionists</li>
-      </ul>
-    </section>
+    <div id="profile" class="tab-content active">
+      <div class="links">
+        <h2>Contact</h2>
+        <a href="https://instagram.com/pablolucas890" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="https://salsa.debian.org/pablolucas890" target="_blank"><i class="fas fa-code-branch"></i> Salsa</a>
+        <a href="https://github.com/pablolucas890" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://contributors.debian.org/contributor/pablolucas890@salsa/" target="_blank"><i class="fas fa-user-astronaut"></i> Debian Contributors</a>
+        <a href="https://linkedin.com/in/pablolucas890" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://t.me/pablolucas890" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+        <a href="https://matrix.to/#/@pablolucas890:matrix.org" target="_blank"><i class="fas fa-comments"></i> Matrix</a>
+      </div>
 
-    <section>
-      <h2>Open Source Projects</h2>
-      <p>You can see the projects that I have contributions in <a href="https://software.free.nf" target="_blank" style="color:#58a6ff; text-decoration: underline;">software.free.nf</a>.</p>
-    </section>
+      <section>
+        <h2>Current Atuation</h2>
+        <ul>
+          <li><strong><a style="color:#58a6ff; text-decoration: none;" href="https://www.amoradev.com.br/" target="_blank">AmoraDev</a></strong> – Tech Solutions.</li>
+          <li><strong><a style="color:#58a6ff; text-decoration: none;" href="https://www.jepdevs.com.br/" target="_blank">JEPdevs</a></strong> – Sites and E-commerces.</li>
+          <li><strong><a style="color:#58a6ff; text-decoration: none;" href="https://ippo.com.br/" target="_blank">Ippo</a></strong> – AI for Nutritionists</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Open Source Projects</h2>
+        <p>You can see the projects that I have contributions in <a href="https://software.free.nf" target="_blank" style="color:#58a6ff; text-decoration: underline;">software.free.nf</a>.</p>
+      </section>
+    </div>
+
+    <div id="linkedin" class="tab-content">
+      <section>
+        <h2>Latest LinkedIn Posts</h2>
+        <div class="linkedin-post">
+          <h3>MiniDebConf Maceió 2025: Contribution, Learning, and a Whole Lot of Team Spirit!</h3>
+          <div class="date">2025</div>
+          <div class="content">
+            It was amazing to take part in MiniDebConf Maceió 2025 as a member of the Debian translation team — and this time, also as a speaker!...
+          </div>
+          <a href="https://www.linkedin.com/feed/update/urn:li:activity:7326286923369496576/" target="_blank">Read more on LinkedIn →</a>
+        </div>
+
+        <div class="linkedin-post">
+          <h3> Orgulho Nacional na DebConf25!</h3>
+          <div class="date">2025</div>
+          <div class="content">
+            A comunidade de software livre está em festa! A DebConf25, maior conferência anual do Debian, será sediada em Brest, na França, e temos um motivo extra para celebrar: a logo vencedora do evento foi criada por uma brasileira! 🇧🇷 ...
+          </div>
+          <a href="https://www.linkedin.com/posts/pablolucas890_resultados-do-concurso-de-logotipo-para-a-activity-7309236141486989313-6JRg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC0GRbcBYRP0YGI8fGLfmQt9oa_DH1bGgNw" target="_blank">Read more on LinkedIn →</a>
+        </div>
+
+        <div class="linkedin-post">
+          <h3>Storybook para React Native</h3>
+          <div class="date">2024</div>
+          <div class="content">
+            E aí, galera! Recentemente, eu e um parceiro encaramos o desafio de traduzir a biblioteca hashtag#storybook para hashtag#reactnative (https://lnkd.in/dJ8xV9HQ)...
+          </div>
+          <a href="https://www.linkedin.com/posts/pablolucas890_storybook-tutorials-activity-7169408506704379904-eGs4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC0GRbcBYRP0YGI8fGLfmQt9oa_DH1bGgNw" target="_blank">Read more on LinkedIn →</a>
+        </div>
+
+        <div class="linkedin-post">
+          <h3>FOS Forums</h3>
+          <div class="date">2023</div>
+          <div class="content">
+            On 27/08/2023, I had the pleasure of participating in the first edition of FOSForums - Free and Open Source Forums at Universidade Estadual de Campinas ...
+          </div>
+          <a href="https://www.linkedin.com/posts/pablolucas890_devops-fosforums-opensource-activity-7102108625816436736-BZnK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC0GRbcBYRP0YGI8fGLfmQt9oa_DH1bGgNw" target="_blank">Read more on LinkedIn →</a>
+        </div>
+        
+        <div class="linkedin-post">
+          <h3>ENDEPA</h3>
+          <div class="date">2023</div>
+          <div class="content">
+            Na última quinta-feira, eu tive o prazer de passar um pouco do meu conhecimento a respeito de automação residencial e industrial para os graduandos em engenharia de Pouso Alegre
+
+            ...
+          </div>
+          <a href="https://www.linkedin.com/posts/pablolucas890_automacao-automacaoindustrial-creajr-activity-7060001205640413184-622M?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC0GRbcBYRP0YGI8fGLfmQt9oa_DH1bGgNw" target="_blank">Read more on LinkedIn →</a>
+        </div>
+
+        <div class="linkedin-post">
+          <h3>TCPDump</h3>
+          <div class="date">2023</div>
+          <div class="content">
+            Medindo tempo de comunicação entre cliente e servidor de maneira rápida...
+          </div>
+          <a href="https://www.linkedin.com/posts/pablolucas890_tcpdump-activity-7021797758562906113-DrFG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC0GRbcBYRP0YGI8fGLfmQt9oa_DH1bGgNw" target="_blank">Read more on LinkedIn →</a>
+        </div>
+
+      </section>
+    </div>
   </div>
+
+  <script>
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      
+      // Hide all tab content
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      }
+      
+      // Remove active class from all tab buttons
+      tablinks = document.getElementsByClassName("tab-button");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+      
+      // Show the current tab and add active class to the button
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+  </script>
 </body>
 </html>
