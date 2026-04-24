@@ -382,6 +382,7 @@
       color: var(--accent);
       position: relative;
       padding-bottom: 1rem;
+      will-change: transform, opacity, filter;
     }
 
     .section-title::after {
@@ -659,6 +660,7 @@
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
       margin-top: 3rem;
+      perspective: 1400px;
     }
 
     .post-card {
@@ -669,6 +671,8 @@
       transition: all 0.3s;
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform, box-shadow, filter;
     }
 
     .post-card::before {
@@ -686,6 +690,22 @@
     .post-card:hover {
       border-color: var(--accent);
       box-shadow: 0 10px 30px rgba(88, 166, 255, 0.2);
+    }
+
+    .post-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 12px;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(121, 192, 255, 0.24), transparent 52%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      mix-blend-mode: screen;
+    }
+
+    .post-card:hover::after {
+      opacity: 1;
     }
 
     .post-card:hover::before {
@@ -1576,6 +1596,38 @@
 
       const suffixItems = gsap.utils.toArray('.suffix-item');
       const suffixWord = document.querySelector('#suffix-word');
+      const sectionTitles = gsap.utils.toArray('.section-title');
+
+      sectionTitles.forEach((title) => {
+        gsap.from(title, {
+          y: 120,
+          z: -260,
+          rotationX: 58,
+          scale: 0.76,
+          opacity: 0,
+          filter: 'blur(12px)',
+          duration: 1.35,
+          ease: 'expo.out',
+          scrollTrigger: {
+            trigger: title,
+            start: 'top 84%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+
+        gsap.fromTo(title, {
+          letterSpacing: '0.36em'
+        }, {
+          letterSpacing: '0.02em',
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: title,
+            start: 'top 84%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      });
 
       if (suffixItems.length && suffixWord) {
         const setSuffix = (activeItem) => {
@@ -1594,7 +1646,7 @@
         });
       }
 
-      gsap.utils.toArray('.experience-card, .post-card').forEach((card, index) => {
+      gsap.utils.toArray('.experience-card').forEach((card, index) => {
         gsap.from(card, {
           y: 40,
           z: -140,
@@ -1609,6 +1661,53 @@
             start: 'top 88%',
             toggleActions: 'play none none reverse'
           }
+        });
+      });
+
+      const postCardsFx = gsap.utils.toArray('.post-card');
+      postCardsFx.forEach((card, index) => {
+        gsap.from(card, {
+          z: -260,
+          rotationX: 26,
+          rotationY: index % 2 === 0 ? -14 : 14,
+          y: 70,
+          scale: 0.86,
+          opacity: 0,
+          duration: 1.25,
+          ease: 'expo.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+
+        const rotY = gsap.quickTo(card, 'rotationY', { duration: 0.55, ease: 'power3.out' });
+        const rotX = gsap.quickTo(card, 'rotationX', { duration: 0.55, ease: 'power3.out' });
+        const lift = gsap.quickTo(card, 'z', { duration: 0.55, ease: 'power3.out' });
+        const yUp = gsap.quickTo(card, 'y', { duration: 0.55, ease: 'power3.out' });
+
+        card.addEventListener('pointermove', (event) => {
+          const rect = card.getBoundingClientRect();
+          const px = (event.clientX - rect.left) / rect.width;
+          const py = (event.clientY - rect.top) / rect.height;
+          const centerX = (px - 0.5) * 2;
+          const centerY = (py - 0.5) * 2;
+          card.style.setProperty('--mx', `${Math.max(0, Math.min(100, px * 100))}%`);
+          card.style.setProperty('--my', `${Math.max(0, Math.min(100, py * 100))}%`);
+          rotY(centerX * 18);
+          rotX(-centerY * 18);
+          lift(95);
+          yUp(-12);
+        });
+
+        card.addEventListener('pointerleave', () => {
+          rotY(0);
+          rotX(0);
+          lift(0);
+          yUp(0);
+          card.style.removeProperty('--mx');
+          card.style.removeProperty('--my');
         });
       });
 
@@ -1740,7 +1839,7 @@
     const homeSection = document.querySelector('#home');
     const contactSection = document.querySelector('#contact');
     const heroContent = document.querySelector('.hero-content');
-    const cards3D = document.querySelectorAll('.experience-card, .post-card');
+    const cards3D = document.querySelectorAll('.experience-card');
     const scrambleTargets = document.querySelectorAll('#contact .contact-carousel-item .contact-label');
     const contactCarouselCards = document.querySelectorAll('#contact .contact-carousel-item');
     const navScrambleTargets = document.querySelectorAll('.nav-links a');
