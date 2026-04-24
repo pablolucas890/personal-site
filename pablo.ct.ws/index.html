@@ -533,6 +533,127 @@
       text-decoration: underline;
     }
 
+    .project-shots {
+      max-width: 1320px;
+      min-height: 170vh;
+      position: relative;
+      padding-top: 2rem;
+    }
+
+    .project-shots-head {
+      position: sticky;
+      top: 20vh;
+      height: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .shots-text {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      font-size: clamp(2.2rem, 7vw, 6.2rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin: 0;
+      white-space: nowrap;
+      word-spacing: 0;
+    }
+
+    .project-shots.is-final .shots-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(9.5rem, 16vw, 13.5rem);
+      transform: translate(calc(-50% + 1.8vw), -50%);
+    }
+
+    .project-shots.is-final .shots-text .shots-word {
+      display: inline-block;
+      min-width: 6.3ch;
+    }
+
+    .project-shots.is-final .shots-text .shots-word.left {
+      text-align: right;
+    }
+
+    .project-shots.is-final .shots-text .shots-word.right {
+      text-align: left;
+    }
+
+    .shots-text.base {
+      color: rgba(240, 246, 252, 0.12);
+      z-index: 1;
+    }
+
+    .shots-text.outline {
+      color: transparent;
+      -webkit-text-stroke: 1.2px rgba(240, 246, 252, 0.8);
+      z-index: 2;
+    }
+
+    .shots-text.filter {
+      color: rgba(88, 166, 255, 0.65);
+      mix-blend-mode: screen;
+      z-index: 3;
+    }
+
+    .project-shots-grid {
+      padding-top: 46vh;
+      width: 100%;
+      max-width: 1220px;
+      margin: 0 auto;
+      min-height: 360vh;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-rows: repeat(72, 1.38%);
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-shots-grid img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+      background: rgba(13, 17, 23, 0.92);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      will-change: transform;
+      opacity: 0.92;
+      filter: brightness(1) saturate(1);
+    }
+
+    .project-shots-grid img:nth-child(1) { grid-area: 1 / 1 / 7 / 8; }
+    .project-shots-grid img:nth-child(2) { grid-area: 3 / 7 / 9 / 13; }
+    .project-shots-grid img:nth-child(3) { grid-area: 9 / 2 / 15 / 10; }
+    .project-shots-grid img:nth-child(4) { grid-area: 11 / 9 / 17 / 13; }
+    .project-shots-grid img:nth-child(5) { grid-area: 16 / 1 / 22 / 7; }
+    .project-shots-grid img:nth-child(6) { grid-area: 18 / 6 / 25 / 13; }
+    .project-shots-grid img:nth-child(7) { grid-area: 24 / 2 / 30 / 9; }
+    .project-shots-grid img:nth-child(8) { grid-area: 26 / 8 / 32 / 13; }
+    .project-shots-grid img:nth-child(9) { grid-area: 31 / 1 / 37 / 7; }
+    .project-shots-grid img:nth-child(10) { grid-area: 33 / 6 / 39 / 12; }
+    .project-shots-grid img:nth-child(11) { grid-area: 38 / 2 / 44 / 8; }
+    .project-shots-grid img:nth-child(12) { grid-area: 40 / 8 / 46 / 13; }
+    .project-shots-grid img:nth-child(13) { grid-area: 46 / 1 / 53 / 8; }
+    .project-shots-grid img:nth-child(14) { grid-area: 48 / 7 / 56 / 13; }
+    .project-shots-grid img:nth-child(15) { grid-area: 55 / 1 / 61 / 7; }
+    .project-shots-grid img:nth-child(16) { grid-area: 57 / 6 / 63 / 12; }
+    .project-shots-grid img:nth-child(17) { grid-area: 62 / 2 / 68 / 9; }
+    .project-shots-grid img:nth-child(18) { grid-area: 64 / 8 / 70 / 13; }
+    .project-shots-grid img:nth-child(19) { grid-area: 69 / 1 / 73 / 7; }
+    .project-shots-grid img:nth-child(20) { grid-area: 69 / 7 / 73 / 13; }
+
     .posts-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -613,49 +734,71 @@
       border-radius: 20px;
       padding: 4rem 2rem;
       text-align: center;
+      overflow: hidden;
     }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
+    .contact-carousel {
+      width: 100%;
+      height: min(68vh, 620px);
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotateX(-16deg) translateY(-14px);
+      transform-style: preserve-3d;
+      perspective: 1100px;
+      user-select: none;
+      cursor: grab;
     }
 
-    .contact-item {
-      background: var(--bg-tertiary);
-      padding: 1.5rem;
-      border-radius: 12px;
-      transition: all 0.3s;
-      border: 2px solid transparent;
+    .contact-carousel-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -64px 0 0 -120px;
+      width: 240px;
+      height: 128px;
+      transform-origin: 50% 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--text-primary);
+      background: linear-gradient(145deg, rgba(33, 38, 45, 0.95), rgba(13, 17, 23, 0.9));
+      border: 1px solid rgba(88, 166, 255, 0.28);
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
-    .contact-item:hover {
-      border-color: var(--accent);
-      box-shadow: 0 10px 25px rgba(88, 166, 255, 0.2);
-    }
-
-    .contact-item a {
+    .contact-carousel-item-content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.8rem;
-      text-decoration: none;
+      gap: 0.55rem;
+      text-align: center;
+    }
+
+    .contact-carousel-item i {
+      font-size: 1.85rem;
+      color: var(--accent);
+    }
+
+    .contact-carousel-item .contact-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.015em;
       color: var(--text-secondary);
     }
 
-    .contact-item i {
-      font-size: 2rem;
-      color: var(--accent);
-      transition: transform 0.3s;
+    .contact-carousel-item:hover .contact-label {
+      color: var(--text-primary);
     }
 
-    .contact-item:hover i {
-      transform: scale(1.2);
-    }
-
-    .contact-item span {
-      font-weight: 500;
+    .contact-carousel-item:hover {
+      border-color: rgba(121, 192, 255, 0.85);
+      box-shadow: 0 20px 44px rgba(88, 166, 255, 0.2);
     }
 
     @keyframes fadeInUp {
@@ -739,8 +882,9 @@
         grid-template-columns: 1fr;
       }
 
-      .contact-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .contact-carousel {
+        transform: rotateX(-10deg) scale(0.78) translateY(-20px);
+        height: min(58vh, 520px);
       }
 
       .scroll-top {
@@ -767,6 +911,36 @@
 
       .suffix-sticky {
         position: static;
+      }
+
+      .project-shots {
+        min-height: auto;
+      }
+
+      .project-shots-head {
+        position: static;
+        height: auto;
+        margin-bottom: 1rem;
+      }
+
+      .shots-text {
+        position: static;
+        transform: none;
+        white-space: normal;
+        margin-bottom: 0.35rem;
+      }
+
+      .project-shots-grid {
+        padding-top: 1rem;
+        min-height: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+        gap: 1rem;
+      }
+
+      .project-shots-grid img:nth-child(n) {
+        grid-area: auto;
+        aspect-ratio: 16 / 10;
       }
     }
 
@@ -817,8 +991,8 @@
         height: 45px;
       }
 
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .contact-carousel {
+        transform: rotateX(-8deg) scale(0.62) translateY(-40px);
       }
     }
   </style>
@@ -1077,52 +1251,61 @@
     </div>
   </section>
 
+  <section id="prints" class="project-shots fade-in">
+    <div class="project-shots-head" aria-hidden="true">
+      <h2 class="shots-text base">Examples</h2>
+      <h2 class="shots-text outline">Examples</h2>
+      <h2 class="shots-text filter">Examples</h2>
+    </div>
+    <div class="project-shots-grid">
+      <img data-speed="0.8" src="./assets/1.png" alt="Project print 1">
+      <img data-speed="0.9" src="./assets/2.png" alt="Project print 2">
+      <img data-speed="1.0" src="./assets/3.png" alt="Project print 3">
+      <img data-speed="1.1" src="./assets/4.png" alt="Project print 4">
+      <img data-speed="0.9" src="./assets/5.png" alt="Project print 5">
+      <img data-speed="1.2" src="./assets/6.png" alt="Project print 6">
+      <img data-speed="0.8" src="./assets/7.png" alt="Project print 7">
+      <img data-speed="1.0" src="./assets/8.png" alt="Project print 8">
+      <img data-speed="0.9" src="./assets/9.png" alt="Project print 9">
+      <img data-speed="1.1" src="./assets/10.png" alt="Project print 10">
+      <img data-speed="0.95" src="./assets/11.png" alt="Project print 11">
+      <img data-speed="1.05" src="./assets/12.png" alt="Project print 12">
+      <img data-speed="1.2" src="./assets/13.gif" alt="Project print 13 gif">
+      <img data-speed="1.25" src="./assets/14.gif" alt="Project print 14 gif">
+      <img data-speed="0.95" src="./assets/13.png" alt="Project print 13">
+      <img data-speed="1.0" src="./assets/15.png" alt="Project print 15">
+      <img data-speed="1.05" src="./assets/16.png" alt="Project print 16">
+      <img data-speed="1.1" src="./assets/17.png" alt="Project print 17">
+      <img data-speed="0.9" src="./assets/12.png" alt="Project print bonus">
+      <img data-speed="1.0" src="./assets/18.png" alt="Project print 18">
+    </div>
+  </section>
+
   <section id="contact" class="fade-in">
     <div class="contact-section">
       <h2 class="section-title">Contact</h2>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <a href="https://instagram.com/pablolucas890" target="_blank">
-            <i class="fab fa-instagram"></i>
-            <span>Instagram</span>
-          </a>
-        </div>
-        <div class="contact-item">
-          <a href="https://salsa.debian.org/pablolucas890" target="_blank">
-            <i class="fas fa-code-branch"></i>
-            <span>Salsa</span>
-          </a>
-        </div>
-        <div class="contact-item">
-          <a href="https://github.com/pablolucas890" target="_blank">
-            <i class="fab fa-github"></i>
-            <span>GitHub</span>
-          </a>
-        </div>
-        <div class="contact-item">
-          <a href="https://contributors.debian.org/contributor/pablolucas890@salsa/" target="_blank">
-            <i class="fas fa-user-astronaut"></i>
-            <span>Debian Contributors</span>
-          </a>
-        </div>
-        <div class="contact-item">
-          <a href="https://linkedin.com/in/pablolucas890" target="_blank">
-            <i class="fab fa-linkedin"></i>
-            <span>LinkedIn</span>
-          </a>
-        </div>
-        <div class="contact-item">
-          <a href="https://t.me/pablolucas890" target="_blank">
-            <i class="fab fa-telegram"></i>
-            <span>Telegram</span>
-          </a>
-        </div>
-        <div class="contact-item">
-          <a href="https://matrix.to/#/@pablolucas890:matrix.org" target="_blank">
-            <i class="fas fa-comments"></i>
-            <span>Matrix</span>
-          </a>
-        </div>
+      <div class="contact-carousel">
+        <a class="contact-carousel-item" href="https://instagram.com/pablolucas890" target="_blank" rel="noreferrer">
+          <div class="contact-carousel-item-content"><i class="fab fa-instagram"></i><span class="contact-label">Instagram</span></div>
+        </a>
+        <a class="contact-carousel-item" href="https://salsa.debian.org/pablolucas890" target="_blank" rel="noreferrer">
+          <div class="contact-carousel-item-content"><i class="fas fa-code-branch"></i><span class="contact-label">Salsa</span></div>
+        </a>
+        <a class="contact-carousel-item" href="https://github.com/pablolucas890" target="_blank" rel="noreferrer">
+          <div class="contact-carousel-item-content"><i class="fab fa-github"></i><span class="contact-label">GitHub</span></div>
+        </a>
+        <a class="contact-carousel-item" href="https://contributors.debian.org/contributor/pablolucas890@salsa/" target="_blank" rel="noreferrer">
+          <div class="contact-carousel-item-content"><i class="fas fa-user-astronaut"></i><span class="contact-label">Debian</span></div>
+        </a>
+        <a class="contact-carousel-item" href="https://linkedin.com/in/pablolucas890" target="_blank" rel="noreferrer">
+          <div class="contact-carousel-item-content"><i class="fab fa-linkedin"></i><span class="contact-label">LinkedIn</span></div>
+        </a>
+        <a class="contact-carousel-item" href="https://t.me/pablolucas890" target="_blank" rel="noreferrer">
+          <div class="contact-carousel-item-content"><i class="fab fa-telegram"></i><span class="contact-label">Telegram</span></div>
+        </a>
+        <a class="contact-carousel-item" href="https://matrix.to/#/@pablolucas890:matrix.org" target="_blank" rel="noreferrer">
+          <div class="contact-carousel-item-content"><i class="fas fa-comments"></i><span class="contact-label">Matrix</span></div>
+        </a>
       </div>
     </div>
   </section>
@@ -1411,7 +1594,7 @@
         });
       }
 
-      gsap.utils.toArray('.experience-card, .post-card, .contact-item').forEach((card, index) => {
+      gsap.utils.toArray('.experience-card, .post-card').forEach((card, index) => {
         gsap.from(card, {
           y: 40,
           z: -140,
@@ -1451,6 +1634,105 @@
           scrub: 1.2
         }
       });
+
+      const printImages = gsap.utils.toArray('.project-shots-grid img');
+      if (printImages.length) {
+        const skewSetter = gsap.quickTo(printImages, 'skewY', { duration: 0.28, ease: 'power2.out' });
+        const clamp = gsap.utils.clamp(-16, 16);
+
+        ScrollTrigger.create({
+          trigger: '#prints',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+          onUpdate: (self) => skewSetter(clamp(self.getVelocity() / -220)),
+          onLeave: () => skewSetter(0),
+          onLeaveBack: () => skewSetter(0)
+        });
+
+        printImages.forEach((img) => {
+          const speed = parseFloat(img.dataset.speed || '1');
+          const travel = (speed - 1) * 120;
+          gsap.to(img, {
+            y: travel,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#prints',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.7
+            }
+          });
+        });
+
+        const printsSection = document.querySelector('#prints');
+        const shotsTitles = gsap.utils.toArray('.project-shots .shots-text');
+        const setShotsText = (text, finalState = false) => {
+          shotsTitles.forEach((el) => {
+            if (finalState) {
+              el.innerHTML = '<span class="shots-word left">Final</span><span class="shots-word right">Chapter</span>';
+            } else {
+              el.textContent = text;
+            }
+          });
+        };
+
+        let isFinalTitle = false;
+        const setFinalState = (state) => {
+          if (!printsSection) return;
+          isFinalTitle = state;
+          printsSection.classList.toggle('is-final', state);
+          setShotsText(state ? 'Final Chapter' : 'Examples', state);
+        };
+
+        setFinalState(false);
+
+        ScrollTrigger.create({
+          trigger: '#prints',
+          endTrigger: '#contact',
+          start: 'top 72%',
+          end: 'top 82%',
+          scrub: false,
+          onUpdate: (self) => {
+            if (!isFinalTitle && self.progress >= 0.72) {
+              setFinalState(true);
+            } else if (isFinalTitle && self.progress <= 0.6) {
+              setFinalState(false);
+            }
+          }
+        });
+
+        ScrollTrigger.create({
+          trigger: '#contact',
+          start: 'top 92%',
+          onEnter: () => setFinalState(true),
+          onLeaveBack: () => setFinalState(false)
+        });
+      }
+
+      const contactCarousel = document.querySelector('.contact-carousel');
+      const contactItems = gsap.utils.toArray('.contact-carousel-item');
+      const contactRadius = 280;
+
+      if (contactCarousel && contactItems.length) {
+        const contactState = { autoSpin: 0 };
+
+        const renderCarousel = () => {
+          contactState.autoSpin += 0.0011;
+          const spin = contactState.autoSpin;
+
+          contactItems.forEach((item, index) => {
+            const theta = index / contactItems.length - spin;
+            const x = -Math.sin(theta * Math.PI * 2) * contactRadius;
+            const z = Math.cos(theta * Math.PI * 2) * contactRadius;
+            item.style.transform = `translate3d(${x}px, 0px, ${z}px) rotateY(${360 * -theta}deg)`;
+            item.style.opacity = `${Math.max(0.35, (z + contactRadius) / (contactRadius * 2))}`;
+          });
+        };
+
+        renderCarousel();
+        gsap.ticker.add(renderCarousel);
+      }
     }
 
     const nav = document.querySelector('nav');
@@ -1458,8 +1740,9 @@
     const homeSection = document.querySelector('#home');
     const contactSection = document.querySelector('#contact');
     const heroContent = document.querySelector('.hero-content');
-    const cards3D = document.querySelectorAll('.experience-card, .post-card, .contact-item');
-    const scrambleTargets = document.querySelectorAll('#contact .contact-item span');
+    const cards3D = document.querySelectorAll('.experience-card, .post-card');
+    const scrambleTargets = document.querySelectorAll('#contact .contact-carousel-item .contact-label');
+    const contactCarouselCards = document.querySelectorAll('#contact .contact-carousel-item');
     const navScrambleTargets = document.querySelectorAll('.nav-links a');
     let isAvatarFloating = false;
 
@@ -1620,8 +1903,14 @@
 
     scrambleTargets.forEach((target) => {
       scrambleObserver.observe(target);
-      target.addEventListener('mouseenter', () => runTextScramble(target));
       target.addEventListener('focus', () => runTextScramble(target));
+    });
+
+    contactCarouselCards.forEach((card) => {
+      const label = card.querySelector('.contact-label');
+      if (!label) return;
+      card.addEventListener('mouseenter', () => runTextScramble(label));
+      card.addEventListener('focus', () => runTextScramble(label));
     });
 
     navScrambleTargets.forEach((target) => {
