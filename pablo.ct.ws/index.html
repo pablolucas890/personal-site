@@ -261,6 +261,17 @@
       animation: fadeInUp 1s ease-out 0.6s both;
     }
 
+    .hero .quote.interactive-quote {
+      cursor: default;
+      user-select: none;
+    }
+
+    .hero .quote .quote-char {
+      display: inline-block;
+      will-change: transform;
+      transform-origin: center center;
+    }
+
     .social-links {
       display: flex;
       justify-content: center;
@@ -1298,7 +1309,77 @@
         });
     }
 
+    function initInteractiveQuote() {
+      const quote = document.querySelector('.hero .quote');
+      if (!quote || !window.gsap) return;
+      if (quote.dataset.interactiveReady === 'true') return;
+
+      const original = (quote.textContent || '').trim();
+      if (!original) return;
+
+      quote.dataset.interactiveReady = 'true';
+      quote.classList.add('interactive-quote');
+      quote.setAttribute('aria-label', original);
+      quote.textContent = '';
+
+      const fragment = document.createDocumentFragment();
+      Array.from(original).forEach((char) => {
+        const span = document.createElement('span');
+        span.className = 'quote-char';
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.setAttribute('aria-hidden', 'true');
+        fragment.appendChild(span);
+      });
+      quote.appendChild(fragment);
+
+      const chars = quote.querySelectorAll('.quote-char');
+      gsap.set(chars, { xPercent: 0, yPercent: 0, rotation: 0 });
+
+      chars.forEach((char) => {
+        gsap.to(char, {
+          xPercent: () => (Math.random() - 0.5) * 8,
+          yPercent: () => (Math.random() - 0.5) * 8,
+          rotation: () => (Math.random() - 0.5) * 8,
+          duration: 4 + Math.random() * 2.4,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+      });
+
+      quote.addEventListener('mousemove', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement) || !target.classList.contains('quote-char')) return;
+
+        const rect = target.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = ((event.clientX - centerX) / Math.max(rect.width, 1)) * 40;
+        const deltaY = ((event.clientY - centerY) / Math.max(rect.height, 1)) * 40;
+
+        gsap.to(target, {
+          xPercent: `+=${deltaX}`,
+          yPercent: `+=${deltaY}`,
+          rotation: `+=${deltaX * 0.4}`,
+          duration: 1.8,
+          ease: 'expo.out'
+        });
+      });
+
+      quote.addEventListener('mouseleave', () => {
+        gsap.to(chars, {
+          xPercent: 0,
+          yPercent: 0,
+          rotation: 0,
+          duration: 1.5,
+          ease: 'power3.out',
+          stagger: 0.01
+        });
+      });
+    }
+
     init3DBackground();
+    initInteractiveQuote();
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
         animateHeroSubtitleOnce();
